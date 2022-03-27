@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/morheus9/Golang_2/pkg/server"
+	"github.com/morheus9/Golang_2/internal/server"
 )
 
 //It starts Server from package server
