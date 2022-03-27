@@ -1,1 +1,5 @@
-# Golang_2
+# Project Golang_1
+
+Status of Last Deployment:<br>
+
+[![YourActionName Actions Status](https://github.com/morheus9/Golang_1/workflows/Main-build/badge.svg)](https://github.com/morheus9/Golang_1/actions)
