@@ -1,0 +1,12 @@
+version: '2'
+services:
+
+  go-web-app:
+    restart: always
+    build:
+      context: .
+    environment:
+      - VIRTUAL_HOST=example.com
+      - LETSENCRYPT_HOST=example.com
+
+#docker-compose -f go-app-compose.yaml up -d
