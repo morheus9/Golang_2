@@ -1,26 +1,26 @@
 package server
 
 import (
-	"fmt"
+	"html/template"
+	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
-func Server() {
-	r := mux.NewRouter()
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "<h1>This is the homepage. Try /hello and /hello/8host\n</h1>")
-	})
-	r.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "<h1>Hello from Docker!\n</h1>")
-	})
-	r.HandleFunc("/hello/{name}", func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
-		title := vars["name"]
-		fmt.Fprintf(w, "<h1>Hello, %s!\n</h1>", title)
-	})
-	http.ListenAndServe(":80", r)
+func static(w http.ResponseWriter, r *http.Request) {
+	var tmplt = template.Must(template.ParseFiles("./static/index.html"))
+	tmplt.Execute(w, nil)
 }
 
-//Server starts server on 127.0.0.1:80/
+func about(w http.ResponseWriter, r *http.Request) {
+	var tmplt = template.Must(template.ParseFiles("./static/about.html"))
+	tmplt.Execute(w, nil)
+}
+
+//Server starts server on 127.0.0.1:8080/
+func Server() {
+
+	http.HandleFunc("/", static)
+	http.HandleFunc("/about", about)
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
