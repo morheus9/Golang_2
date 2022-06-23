@@ -6,12 +6,12 @@ import (
 	"net/http"
 )
 
-func static(w http.ResponseWriter, r *http.Request) {
+func static(w http.ResponseWriter, _ *http.Request) {
 	var tmplt = template.Must(template.ParseFiles("./static/index.html"))
 	tmplt.Execute(w, nil)
 }
 
-func about(w http.ResponseWriter, r *http.Request) {
+func about(w http.ResponseWriter, _ *http.Request) {
 	var tmplt = template.Must(template.ParseFiles("./static/about.html"))
 	tmplt.Execute(w, nil)
 }
@@ -22,5 +22,5 @@ func Server() {
 	http.HandleFunc("/", static)
 	http.HandleFunc("/about", about)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
